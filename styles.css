@@ -1,0 +1,1061 @@
+/* ===================================
+   CSS CUSTOM PROPERTIES (VARIABLES)
+   Brand colors from the original site
+   =================================== */
+:root {
+    /* Brand color palette */
+    --brand-green: #10451d;
+    /* Primary green - header, footer, buttons */
+    --brand-green-dark: #0b2e13;
+    /* Darker green for hover states */
+    --brand-brown: #593d2b;
+    /* Accent brown */
+    --brand-bg: #f4f1ea;
+    /* Beige background */
+    --brand-accent: #d48c3d;
+    /* Orange accent for highlights */
+    --brand-text: #1c1c1c;
+    /* Dark text color */
+    --brand-surface: #ffffff;
+    /* White for cards */
+
+    /* Typography */
+    --font-sans: 'Montserrat', sans-serif;
+    /* Main font */
+    --font-serif: 'Lora', serif;
+    /* Decorative font */
+}
+
+/* ===================================
+   RESET & BASE STYLES
+   =================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    /* Prevent horizontal scroll on entire page */
+    width: 100%;
+    min-height: 100%;
+    /* Ensure html covers at least full height */
+    background-color: #0d3d1a;
+    /* Dark green fallback - matches forest theme */
+}
+
+body {
+    font-family: var(--font-sans);
+    /* Fixed forest background - stays in place while content scrolls */
+    background-color: #0d3d1a;
+    /* Dark green fallback */
+    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&h=1080&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* CRITICAL: Background stays fixed, content scrolls over it */
+    color: var(--brand-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    /* Smooth transitions for hover effects */
+}
+
+ul {
+    list-style: none;
+}
+
+/* ===================================
+   CONTAINER - Centers content with max width
+   =================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===================================
+   HEADER - Navigation bar
+   =================================== */
+.header {
+    position: fixed;
+    /* Stays at top when scrolling */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    padding: 20px 0;
+    z-index: 1000;
+    /* Ensures header stays above other content */
+    transition: background-color 0.3s ease;
+}
+
+/* Adds background to header when scrolling */
+.header.scrolled {
+    background-color: rgba(16, 69, 29, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.logo-icon {
+    font-size: 28px;
+}
+
+/* Navigation menu */
+.nav-list {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.nav-link {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--brand-accent);
+}
+
+/* Book Now button styling */
+.btn-book {
+    background-color: var(--brand-green);
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.btn-book:hover {
+    background-color: var(--brand-green-dark);
+    color: #ffffff;
+}
+
+/* Hamburger menu for mobile - hidden by default */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* ===================================
+   CAROUSEL SECTION
+   =================================== */
+.carousel-section {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1000px;
+    z-index: 100;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(16, 69, 29, 0.9);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(16, 69, 29, 0.8);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    z-index: 102;
+}
+
+.carousel-btn:hover {
+    background: rgba(16, 69, 29, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 15px;
+}
+
+.carousel-btn.next {
+    right: 15px;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+    .carousel-section {
+        width: 95%;
+    }
+
+    .carousel-container {
+        height: 200px;
+    }
+
+    .carousel-caption {
+        font-size: 14px;
+        padding: 6px 18px;
+    }
+
+    .carousel-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-container {
+        height: 160px;
+    }
+
+    .carousel-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+    }
+}
+
+/* ===================================
+   HERO SECTION - Main banner
+   =================================== */
+.hero {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    /* Overlay on carousel */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent;
+    z-index: 101;
+    /* Above carousel */
+    padding: 80px 20px;
+    pointer-events: none;
+    /* Allow clicks to pass through to carousel buttons */
+}
+
+/* Dark overlay to improve text readability */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1;
+}
+
+/* Hero content positioned above overlay */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+/* ===================================
+   PACKAGES SECTION
+   =================================== */
+.packages {
+    padding: 40px 0;
+    margin-top: 420px;
+    /* Position after carousel (80px top + 250px carousel height + 90px spacing) */
+    background: transparent;
+    position: relative;
+    z-index: 3;
+    min-height: 100vh;
+}
+
+/* Dark overlay for packages section - removed since background is transparent */
+/* .packages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+} */
+
+.packages .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Grid layout for package cards */
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* Individual package card */
+.package-card {
+    background: rgba(255, 255, 255, 0.15);
+    /* Highly transparent blurred glass effect */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(20px) saturate(180%);
+    /* Strong blur with color saturation */
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle border for glass effect */
+}
+
+/* Hover effect - card lifts up */
+.package-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+    /* Slightly more opaque on hover */
+}
+
+/* Package image container */
+.package-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.package-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Image zoom effect on hover */
+.package-card:hover .package-image img {
+    transform: scale(1.1);
+}
+
+/* Package content area */
+.package-content {
+    padding: 24px;
+}
+
+/* Duration label in orange */
+.package-duration {
+    color: #ffb74d;
+    /* Bright orange for glass background */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* Text shadow for readability */
+}
+
+/* Package title */
+.package-title {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    /* White for strong contrast */
+    margin-bottom: 16px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    /* Strong shadow for readability */
+}
+
+/* Highlights section */
+.package-highlights {
+    margin-bottom: 20px;
+}
+
+.highlights-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffb74d;
+    /* Same orange as duration */
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.highlights-text {
+    font-size: 14px;
+    color: #f5f5f5;
+    /* Almost white for clarity */
+    line-height: 1.6;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* View Itinerary link */
+.package-link {
+    display: inline-block;
+    color: #ffffff;
+    /* Same white as title */
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.package-link:hover {
+    color: #ffb74d;
+    /* Orange on hover (same as duration) */
+    text-decoration: underline;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+.footer {
+    background-color: var(--brand-green);
+    /* Brand green color */
+    color: #ffffff;
+    padding: 60px 0 0;
+}
+
+/* Footer grid - 4 columns */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* Footer brand section */
+.footer-brand {
+    padding-right: 20px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.footer-logo-icon {
+    font-size: 26px;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.9;
+    color: #e0e0e0;
+}
+
+/* Footer column headings */
+.footer-heading {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Footer links list */
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: #e0e0e0;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Contact information list */
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #e0e0e0;
+    line-height: 1.5;
+}
+
+.contact-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.footer-contact a {
+    color: #e0e0e0;
+    transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Social media buttons */
+.social-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.social-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.social-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Footer bottom - copyright section */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    color: #e0e0e0;
+    opacity: 0.8;
+}
+
+/* ===================================
+   FOOTER - RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet view */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        padding-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .social-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-heading {
+        font-size: 16px;
+    }
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - TABLET
+   =================================== */
+@media (max-width: 768px) {
+
+    /* Hero section adjustments */
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    /* Navigation - show hamburger menu */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hide navigation by default on mobile */
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Hidden off-screen by default */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--brand-green);
+        padding: 80px 30px 30px;
+        transition: right 0.3s ease;
+    }
+
+    /* Show navigation when active */
+    .nav.active {
+        right: 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    /* Packages grid - 1 column on tablet */
+    .packages-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===================================
+   RESPONSIVE DESIGN - MOBILE
+   =================================== */
+@media (max-width: 480px) {
+
+    /* Smaller hero text on mobile */
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    /* Adjust package card padding */
+    .package-content {
+        padding: 20px;
+    }
+
+    .package-title {
+        font-size: 24px;
+    }
+
+    /* Logo text size */
+    .logo {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        font-size: 24px;
+    }
+}
+
+/* ===================================
+   PACKAGE DETAIL PAGE STYLES
+   =================================== */
+
+/* Package detail section - padding to account for fixed header */
+.package-detail {
+    padding: 120px 0 60px;
+    background-color: var(--brand-bg);
+    min-height: 100vh;
+}
+
+/* Back to all packages link */
+.back-link {
+    display: inline-block;
+    color: var(--brand-green);
+    font-size: 15px;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--brand-green-dark);
+}
+
+/* Two-column grid: content on left, sidebar on right */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+/* Left column - main content */
+.detail-content {
+    max-width: 100%;
+}
+
+/* Package title and duration */
+.detail-title {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--brand-green);
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.detail-duration {
+    color: var(--brand-accent);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+
+/* Package description */
+.detail-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Itinerary heading */
+.itinerary-heading {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--brand-green);
+    margin-bottom: 30px;
+}
+
+/* Day section container */
+.day-section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: var(--brand-surface);
+    border-radius: 8px;
+    border-left: 4px solid var(--brand-accent);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Day title */
+.day-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brand-text);
+    margin-bottom: 20px;
+}
+
+/* Timeline container for itinerary items */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Individual timeline item */
+.timeline-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+/* Arrow icon for timeline items */
+.timeline-icon {
+    color: var(--brand-accent);
+    font-size: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Timeline content */
+.timeline-content {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #444;
+}
+
+.timeline-content strong {
+    color: var(--brand-text);
+    font-weight: 600;
+}
+
+/* Right sidebar */
+.detail-sidebar {
+    position: sticky;
+    top: 100px;
+    /* Sticks below the header */
+    height: fit-content;
+}
+
+/* Sidebar image */
+.sidebar-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Booking card */
+.booking-card {
+    background-color: var(--brand-surface);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.booking-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--brand-text);
+    margin-bottom: 12px;
+}
+
+.booking-text {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Book Now button */
+.booking-btn {
+    display: block;
+    width: 100%;
+    background-color: var(--brand-green);
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 28px;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.booking-btn:hover {
+    background-color: var(--brand-green-dark);
+}
+
+.booking-note {
+    font-size: 12px;
+    color: #999;
+    margin-top: 12px;
+    font-style: italic;
+}
+
+/* ===================================
+   PACKAGE DETAIL - RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet view */
+@media (max-width: 1024px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .detail-sidebar {
+        position: relative;
+        top: 0;
+    }
+
+    .detail-title {
+        font-size: 40px;
+    }
+
+    .itinerary-heading {
+        font-size: 32px;
+    }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .package-detail {
+        padding: 100px 0 40px;
+    }
+
+    .detail-title {
+        font-size: 32px;
+    }
+
+    .itinerary-heading {
+        font-size: 28px;
+    }
+
+    .day-section {
+        padding: 20px;
+    }
+
+    .day-title {
+        font-size: 20px;
+    }
+
+    .timeline-content {
+        font-size: 14px;
+    }
+
+    .booking-card {
+        padding: 24px;
+    }
+}
