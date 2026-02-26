@@ -17,7 +17,9 @@ jobs:
 
       - name: Set image timestamp tag
         id: vars
-        run: echo "IMAGE_TAG=$(TZ=Asia/Kolkata date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+        run: |
+          echo "IMAGE_TAG=$(TZ=Asia/Kolkata date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+          echo "IMAGE_REPO=ghcr.io/${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -39,5 +41,5 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ${{ toLower(format('ghcr.io/{0}:{1}', github.repository, steps.vars.outputs.IMAGE_TAG)) }}
+            ${{ steps.vars.outputs.IMAGE_REPO }}:${{ steps.vars.outputs.IMAGE_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
