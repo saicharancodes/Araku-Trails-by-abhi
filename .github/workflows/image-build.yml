@@ -39,5 +39,5 @@ jobs:
           push: true
           tags: |
             ${{ steps.meta.outputs.tags }}
-            ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.IMAGE_TAG }}
+            ${{ toLower(format('ghcr.io/{0}:{1}', github.repository, steps.vars.outputs.IMAGE_TAG)) }}
           labels: ${{ steps.meta.outputs.labels }}
